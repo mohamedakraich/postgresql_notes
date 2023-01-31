@@ -67,3 +67,10 @@ Table hashtag_posts {
   hashtag_id INTEGER [ref: > hashtags.id]
   post_id INTEGER [ref: > posts.id]
 }
+
+Table followers {
+  id SERIAL [pk, increment]
+  leader_id INTEGER [ref: > users.id]
+  follower_id INTEGER [ref: > users.id]
+  created_at TIMESTAMP
+}

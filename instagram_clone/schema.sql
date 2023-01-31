@@ -68,6 +68,13 @@ CREATE TABLE "hashtag_posts" (
   "post_id" INTEGER
 );
 
+CREATE TABLE "followers" (
+  "id" SERIAL PRIMARY KEY,
+  "leader_id" INTEGER,
+  "follower_id" INTEGER,
+  "created_at" TIMESTAMP
+);
+
 ALTER TABLE "posts" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
 ALTER TABLE "comments" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
@@ -91,3 +98,7 @@ ALTER TABLE "mentions" ADD FOREIGN KEY ("post_id") REFERENCES "posts" ("id");
 ALTER TABLE "hashtag_posts" ADD FOREIGN KEY ("hashtag_id") REFERENCES "hashtags" ("id");
 
 ALTER TABLE "hashtag_posts" ADD FOREIGN KEY ("post_id") REFERENCES "posts" ("id");
+
+ALTER TABLE "followers" ADD FOREIGN KEY ("leader_id") REFERENCES "users" ("id");
+
+ALTER TABLE "followers" ADD FOREIGN KEY ("follower_id") REFERENCES "users" ("id");
