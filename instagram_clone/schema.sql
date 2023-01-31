@@ -1,6 +1,12 @@
 CREATE TABLE "users" (
   "id" SERIAL PRIMARY KEY,
   "username" VARCHAR(30),
+  "bio" VARCHAR(400),
+  "avatar" VARCHAR(200),
+  "phone" VARCHAR(25),
+  "email" VARCHAR(40),
+  "password" VARCHAR(50),
+  "status" VARCHAR(15),
   "created_at" TIMESTAMP,
   "updated_at" TIMESTAMP
 );
@@ -50,6 +56,18 @@ CREATE TABLE "mentions" (
   "created_at" TIMESTAMP
 );
 
+CREATE TABLE "hashtags" (
+  "id" SERIAL PRIMARY KEY,
+  "title" VARCHAR(200),
+  "created_at" TIMESTAMP
+);
+
+CREATE TABLE "hashtag_posts" (
+  "id" SERIAL PRIMARY KEY,
+  "hashtag_id" INTEGER,
+  "post_id" INTEGER
+);
+
 ALTER TABLE "posts" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
 ALTER TABLE "comments" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
@@ -69,3 +87,7 @@ ALTER TABLE "tags" ADD FOREIGN KEY ("post_id") REFERENCES "posts" ("id");
 ALTER TABLE "mentions" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
 ALTER TABLE "mentions" ADD FOREIGN KEY ("post_id") REFERENCES "posts" ("id");
+
+ALTER TABLE "hashtag_posts" ADD FOREIGN KEY ("hashtag_id") REFERENCES "hashtags" ("id");
+
+ALTER TABLE "hashtag_posts" ADD FOREIGN KEY ("post_id") REFERENCES "posts" ("id");

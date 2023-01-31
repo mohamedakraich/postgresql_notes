@@ -1,6 +1,12 @@
 Table users {
   id SERIAL [pk, increment]
   username VARCHAR(30)
+  bio VARCHAR(400)
+  avatar VARCHAR(200)
+  phone VARCHAR(25)
+  email VARCHAR(40)
+  password VARCHAR(50)
+  status VARCHAR(15)
   created_at TIMESTAMP
   updated_at TIMESTAMP
 }
@@ -48,4 +54,16 @@ Table mentions {
   user_id INTEGER [ref: > users.id]
   post_id INTEGER [ref: > posts.id]
   created_at TIMESTAMP
+}
+
+Table hashtags {
+  id SERIAL [pk, increment]
+  title VARCHAR(200)
+  created_at TIMESTAMP
+}
+
+Table hashtag_posts {
+  id SERIAL [pk, increment]
+  hashtag_id INTEGER [ref: > hashtags.id]
+  post_id INTEGER [ref: > posts.id]
 }
