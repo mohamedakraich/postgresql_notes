@@ -1,0 +1,23 @@
+Table users {
+  id SERIAL [pk, increment]
+  username VARCHAR(30)
+  created_at TIMESTAMP
+  updated_at TIMESTAMP
+}
+
+Table posts {
+  id SERIAL [pk, increment]
+  url VARCHAR(200)
+  user_id INTEGER [ref: > users.id]
+  created_at TIMESTAMP
+  updated_at TIMESTAMP
+}
+
+Table comments {
+  id SERIAL [pk, increment]
+  contents VARCHAR(240)
+  user_id INTEGER [ref: > users.id]
+  post_id INTEGER [ref: > posts.id]
+  created_at TIMESTAMP
+  updated_at TIMESTAMP
+}
