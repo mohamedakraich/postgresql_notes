@@ -8,6 +8,9 @@ Table users {
 Table posts {
   id SERIAL [pk, increment]
   url VARCHAR(200)
+  caption VARCHAR(240)
+  lat REAL
+  lng REAL
   user_id INTEGER [ref: > users.id]
   created_at TIMESTAMP
   updated_at TIMESTAMP
@@ -27,5 +30,22 @@ Table likes {
   user_id INTEGER [ref: > users.id]
   post_id INTEGER [ref: > posts.id]
   comment_id INTEGER [ref: > comments.id]
+  created_at TIMESTAMP
+}
+
+Table tags {
+  id SERIAL [pk, increment]
+  x INTEGER
+  y INTEGER
+  user_id INTEGER [ref: > users.id]
+  post_id INTEGER [ref: > posts.id]
+  created_at TIMESTAMP
+  updated_at TIMESTAMP
+}
+
+Table mentions {
+  id SERIAL [pk, increment]
+  user_id INTEGER [ref: > users.id]
+  post_id INTEGER [ref: > posts.id]
   created_at TIMESTAMP
 }

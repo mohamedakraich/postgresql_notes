@@ -8,6 +8,9 @@ CREATE TABLE "users" (
 CREATE TABLE "posts" (
   "id" SERIAL PRIMARY KEY,
   "url" VARCHAR(200),
+  "caption" VARCHAR(240),
+  "lat" REAL,
+  "lng" REAL,
   "user_id" INTEGER,
   "created_at" TIMESTAMP,
   "updated_at" TIMESTAMP
@@ -30,6 +33,23 @@ CREATE TABLE "likes" (
   "created_at" TIMESTAMP
 );
 
+CREATE TABLE "tags" (
+  "id" SERIAL PRIMARY KEY,
+  "x" INTEGER,
+  "y" INTEGER,
+  "user_id" INTEGER,
+  "post_id" INTEGER,
+  "created_at" TIMESTAMP,
+  "updated_at" TIMESTAMP
+);
+
+CREATE TABLE "mentions" (
+  "id" SERIAL PRIMARY KEY,
+  "user_id" INTEGER,
+  "post_id" INTEGER,
+  "created_at" TIMESTAMP
+);
+
 ALTER TABLE "posts" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
 ALTER TABLE "comments" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
@@ -41,3 +61,11 @@ ALTER TABLE "likes" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 ALTER TABLE "likes" ADD FOREIGN KEY ("post_id") REFERENCES "posts" ("id");
 
 ALTER TABLE "likes" ADD FOREIGN KEY ("comment_id") REFERENCES "comments" ("id");
+
+ALTER TABLE "tags" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+
+ALTER TABLE "tags" ADD FOREIGN KEY ("post_id") REFERENCES "posts" ("id");
+
+ALTER TABLE "mentions" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+
+ALTER TABLE "mentions" ADD FOREIGN KEY ("post_id") REFERENCES "posts" ("id");
