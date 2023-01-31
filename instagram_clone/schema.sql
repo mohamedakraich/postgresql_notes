@@ -22,8 +22,22 @@ CREATE TABLE "comments" (
   "updated_at" TIMESTAMP
 );
 
+CREATE TABLE "likes" (
+  "id" SERIAL PRIMARY KEY,
+  "user_id" INTEGER,
+  "post_id" INTEGER,
+  "comment_id" INTEGER,
+  "created_at" TIMESTAMP
+);
+
 ALTER TABLE "posts" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
 ALTER TABLE "comments" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
 ALTER TABLE "comments" ADD FOREIGN KEY ("post_id") REFERENCES "posts" ("id");
+
+ALTER TABLE "likes" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+
+ALTER TABLE "likes" ADD FOREIGN KEY ("post_id") REFERENCES "posts" ("id");
+
+ALTER TABLE "likes" ADD FOREIGN KEY ("comment_id") REFERENCES "comments" ("id");

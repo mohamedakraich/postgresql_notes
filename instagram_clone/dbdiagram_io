@@ -21,3 +21,11 @@ Table comments {
   created_at TIMESTAMP
   updated_at TIMESTAMP
 }
+
+Table likes {
+  id SERIAL [pk, increment]
+  user_id INTEGER [ref: > users.id]
+  post_id INTEGER [ref: > posts.id]
+  comment_id INTEGER [ref: > comments.id]
+  created_at TIMESTAMP
+}
